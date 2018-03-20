@@ -1,0 +1,29 @@
+{
+	"stage":[
+		{"TheSlippers": 
+			{
+				"route":
+					[{
+						"position": {
+							"x": 8,
+							"y": 8
+						},
+						"connection": [1]
+					},{
+						"position": {
+							"x": 8,
+							"y": 6
+						},
+						"connection": [0]
+					}],
+				"velocity": 4,
+				"vison_angle": 45,
+				"vison_long": 100,
+				"tracking": {
+					"interval": 10,
+					"shoulder_width": 12
+				}
+			}
+		}
+	]
+}

@@ -1,0 +1,8 @@
+node_modules/
+.DS_Store
+.tmp/
+.sass-cache
+.browserify-cache/
+static/
+phina.*
+tiled/
