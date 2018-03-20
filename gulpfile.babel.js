@@ -196,8 +196,8 @@ gulp.task('watch', (cb) => {
     $.watch([path.public + '**/*.{mp3,ogg,wav}'], function(cb) {
         seq('mv:sounds',browserSync.reload);
     });
-    $.watch([path.public + '**/*.json'], function(cb){
-        seq('mv:json', browserSync.reload);
+    $.watch([path.public + 'publish/'], function(cb){
+        seq('mv:publish', browserSync.reload);
     });
     $.watch([path.js + '**/*'], function(cb) {
         seq('babel');

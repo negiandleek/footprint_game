@@ -4,6 +4,10 @@ phina.define("User", {
 	superClass: "DisplayElement",
 	init: function(player){
 		this.superInit();
+
+		let json = AssetManager.get("text", "player").data;
+		json = JSON.parse(json).player;
+		
 		this.player = player;
 		this.rotate = 0;
 		this.vx = 0;
@@ -99,7 +103,7 @@ phina.define("User", {
 		handle_display.on("pointmove",(e)=>{
 			let x = e.pointer.x - this.target_position.x;
 			let y = e.pointer.y - this.target_position.y;
-			let velocity = CONST.player.velocity;
+			let velocity = json.velocity;
 			let deg = $.calculate_deg(this.target_position, e.pointer);
 			let rad = deg / 180 * Math.PI;
 			this.rotate = deg;

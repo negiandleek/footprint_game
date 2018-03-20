@@ -23,8 +23,8 @@ import "./Enemy.js";
         }
 
         // stage map
-    	let json = AssetManager.get(assetType, stageName).data;
-        let text = JSON.parse(json).layers[0];
+    	let stage_json = AssetManager.get(assetType, stageName).data;
+        let text = JSON.parse(stage_json).layers[0];
 
         for(let i = 0, iz = text.height; i < iz; i+=1){
             this.stage_map[i] = [];
@@ -35,7 +35,7 @@ import "./Enemy.js";
         }
 
         // collision map
-        text = JSON.parse(json).layers[1];
+        text = JSON.parse(stage_json).layers[1];
 
         for(let i = 0, iz = text.height; i < iz; i+=1){
             this.collision_map[i] = [];
@@ -46,15 +46,18 @@ import "./Enemy.js";
         }
 
         // enemys
-        json = AssetManager.get(assetType, stageName + "_enemy").data;
-        this.enemys_map = JSON.parse(json)[stageName];
+        let enemys_json = AssetManager.get(assetType, stageName + "_enemy").data;
+        this.enemys_map = JSON.parse(enemys_json)[stageName];
+
 
         this.generate_blocks();
         this.generate_collision_blocks();
         this.generate_enemys();
+        
+        text = JSON.parse(stage_json);
 
-        this.player.x = x;
-        this.player.y = y;
+        this.player.x = text.start.x * CONST.grid;
+        this.player.y = text.start.y * CONST.grid;
         this.player.collision_map = this.collision_map;
     },
     generate_blocks: function(){
@@ -81,26 +84,9 @@ import "./Enemy.js";
                     )
                     .addChildTo(this.blocks)
                 }else if(n === 99){
-                    // RectangleShape({
-                    //     x: j * CONST.grid + gap, 
-                    //     y: i * CONST.grid + gap,
-                    //     fill: "green",
-                    //     stroke: CONST.color.white,
-                    //     width: CONST.grid,
-                    //     height: CONST.grid,
-                    // })
-                    // .addChildTo(this.collision_blocks);
-                    // this.collision_map[i][j] = 0
-                }else{
-                    RectangleShape({
-                        x: j * CONST.grid, 
-                        y: i * CONST.grid,
-                        width: CONST.grid,
-                        height: CONST.grid,
-                        fill: false,
-                        stroke: "black"
-                    })
-                    .addChildTo(this.blocks);
+                    Sprite("treasure")
+                    .addChildTo(this.treasure)
+                    .setPosition(j * CONST.grid, i * CONST.grid)
                 }
             }
         }
@@ -126,8 +112,7 @@ import "./Enemy.js";
         }
     },
     generate_enemys: function(){
-        // for(let i = 0, iz = this.enemys_map.length; i < iz ;i += 1){
-        for(let i = 0, iz = 1; i < iz ;i += 1){
+        for(let i = 0, iz = this.enemys_map.length; i < iz ;i += 1){
             let info = this.enemys_map[i];
             let cls = Object.keys(info);
             info[cls].collision_map = this.collision_map;
@@ -136,6 +121,11 @@ import "./Enemy.js";
                 info[cls],
             ).addChildTo(this.enemys);
         }
+    },
+    calc_offset: function(position){
+        let offset_x = position.x - CONST.screen.width / 2;
+        let offset_y = position.y - CONST.screen.height / 2;
+        return {vx: offset_x, vy: offset_y};
     },
     move: function(){
         this.player.move();
@@ -165,10 +155,5 @@ import "./Enemy.js";
                 }
             });
         }
-    },
-    calc_offset: function(position){
-        let offset_x = position.x - CONST.screen.width / 2;
-        let offset_y = position.y - CONST.screen.height / 2;
-        return {vx: offset_x, vy: offset_y};
     }
 });

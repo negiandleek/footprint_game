@@ -1,23 +1,24 @@
 import {CONST} from "./CONST.js";
 
 phina.define("Player", {
-	// 壁との当たり判定に使用するため
-	// RectangleShapeでインスタンス化
 	superClass: "CircleShape",
 	init: function(){
 		this.superInit({
 			radius: 32,
-			fill: "red",
+			fill: false,
 			stroke: false
 		});
+		let json = AssetManager.get("text", "player").data;
+		json = JSON.parse(json).player;
+
 		this.vx = 0;
 		this.vy = 0;
 		this.x_movement;
 		this.y_movement;
 		this.__rotation = 0;
 
-		this.pace = CONST.player.walking.interval;
-		this.shoulder_width = CONST.player.walking.shoulder_width;
+		this.pace = json.walking.interval;
+		this.shoulder_width = json.walking.shoulder_width;
 		this.r_rad = 90 * Math.PI / 180;
 		this.l_rad = 270 * Math.PI / 180;
 		this.is_right = true;

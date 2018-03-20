@@ -2,7 +2,7 @@ import {CONST} from "./CONST.js";
 
 phina.define("Gameover_Scene", {
 superClass: 'DisplayScene',
- 	init: function(scene, param,text) {
+ 	init: function(scene, param, text) {
 		this.superInit({
 			width: CONST.screen.width,
 			height: CONST.screen.height,
@@ -45,10 +45,13 @@ superClass: 'DisplayScene',
 			width: 280,
 			height: 60
 		}).addChildTo(button_outer);
+
 		let self = this;
+
 		button.onpush = function(){
-			self.exit();
-			scene.init(param);
+			// self.exit();
+			// scene.init(param);
+			location.reload();			
 		}
 	}
 

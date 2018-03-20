@@ -1,0 +1,11 @@
+{
+	"player": { 
+		"width": 32,
+		"height": 32,
+		"velocity": 4, 
+		"walking": {
+			"interval": 8,
+			"shoulder_width": 12
+		}
+	}
+}

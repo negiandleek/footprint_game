@@ -22,22 +22,6 @@ let CONST = {
 		arrow: 20,
 		alpha: 0.8,
 	},
-	player: { 
-		width: 32,
-		height: 32,
-		velocity: 4, 
-		walking: {
-			interval: 13,
-			shoulder_width: 12
-		}
-	},
-	enemy: {
-		velocity: 3,
-		walking: {
-			interval: 15,
-			shoulder_width: 12
-		}
-	}
 }
  
 export {CONST};

@@ -192,8 +192,8 @@ phina.define("Human", {
 		this.is_right = true;
 		this.shoulder_width = options.tracking.shoulder_width;
 	
-		this.add_right_foot();
-		this.add_left_foot();
+		// this.add_right_foot();
+		// this.add_left_foot();
 	},
 	add_right_foot: function(){
 		this.right_foot = Sprite("right_foot").addChildTo(this);
@@ -244,30 +244,13 @@ phina.define("Human", {
 			// 止まっていたら速度と角度を更新
 			if(this.is_stop){
 				this.is_stop = !this.is_stop;
-				// let v = this.calc_velocity();
-				// this.vx = v.vx;
-				// this.vy = v.vy;
 			}
 		}
 		if(this.is_turn){
 			this.is_turn = !this.is_turn;
 		}
 	},
-	work: function(){
-		// if(this.count === this.pace){
-		// 	// this.track();
-		// 	this.count = 0;
-		// }else{
-		// 	this.children.some((child)=>{
-		// 		child.x -= this.vx;
-		// 		child.y -= this.vy;
-		// 	});
-		// 	this.count += 1;
-		// }
-		// this.rotation += this.__rotation;
-		//console.log(this.rotation)
-		// console.log(this.rotation);
-	},
+	work: function(){},
 })
 
 phina.define("TheSlippers",{
@@ -285,26 +268,6 @@ phina.define("TheSlippers",{
 		// 最初の動きを定義
 		this.patrol();
 	},
-	// bend: function(deg){
-	// 	this.vx = 0;
-	// 	this.vy = 0;
-	// 	this.is_turn = true;
-	// 	this.is_stop = true;
-	// 	this.__rotation_previous = this.__rotation;
-	// 	this.__rotation = deg;
-	// },
-	// change_direction: function(p){
-	// 	let x = this.route[this.index].position.x;
-	// 	let y = this.route[this.index].position.y;
-	// 	if(x === p.x && y === p.y){
- // 			// randomにルートを選択するか固定
-	// 		let nindex = this.route[this.index].connection[0];
-	// 		let np = this.route[nindex].position;
-	// 		let deg = this.calc_rotation(np, p, true);
-	// 		this.bend(deg);
-	// 		this.index = nindex;
-	// 	}
-	// },
 	lockon: function(){
 		if(this.hit_test()){
 			return;
